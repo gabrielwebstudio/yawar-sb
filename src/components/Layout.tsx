@@ -6,7 +6,7 @@ type LayoutProps = {
 
 export default function Layout({children} : LayoutProps) {
   return (
-    <div className="min-h-screen flex flex-col pt-20">
+    <div className="min-h-screen flex flex-col pt-20 md:pt-30">
         {children}
     </div>
   )
