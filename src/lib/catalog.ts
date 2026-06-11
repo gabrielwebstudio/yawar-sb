@@ -31,3 +31,19 @@ export const getCatalogData = cache(async () => {
         };
     }
 });
+
+export const getFooter = cache(async () => {
+    try {
+        const storyblokApi = getStoryblokApi();
+
+        const { data } = await storyblokApi.get("cdn/stories/footer", {
+            version,
+        });
+
+        const footer = data.story?.content?.body?.[0] || null;
+
+        return footer;
+    } catch {
+        return null;
+    }
+})

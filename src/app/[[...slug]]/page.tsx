@@ -28,6 +28,7 @@ export default async function Page({ params }: PageProps) {
                 resolve_relations: [
                     "danser_start.danser",
                     "danser_showcase.danser",
+                    "nyheter_showcase.nyheter",
                 ]
             }
         );

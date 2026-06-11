@@ -52,7 +52,7 @@ const Navbar = ({ dances = [] } : NavbarProps) => {
 
                     <Link href="/nyheter" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Nyheter</Link>
 
-                    <Link href="/om" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Om oss</Link>
+                    <Link href="/om-oss" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Om oss</Link>
                     <Link href="/kontakt" className="text-sm font-medium bg-primary text-primary-foreground px-5 py-2 rounded-sm hover:opacity-90 transition-opacity">Kontakt</Link>
                 </div>
 
@@ -99,11 +99,11 @@ const Navbar = ({ dances = [] } : NavbarProps) => {
                         )}
                     </div>
 
-                    <Link href="/om" onClick={() => setMobileOpen(false)} className="block py-3 text-foreground font-medium border-b border-border/50">
+                    <Link href="/nyheter" onClick={() => setMobileOpen(false)} className="block py-3 text-foreground font-medium border-b border-border/50">
                         Nyheter
                     </Link>
 
-                    <Link href="/om" onClick={() => setMobileOpen(false)} className="block py-3 text-foreground font-medium border-b border-border/50">
+                    <Link href="/om-oss" onClick={() => setMobileOpen(false)} className="block py-3 text-foreground font-medium border-b border-border/50">
                         Om oss
                     </Link>
 
