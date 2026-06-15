@@ -13,12 +13,12 @@ export default function ContactForm() {
         phone: "",
         message: "",
     })
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true)
         try {
-            const response = await fetch('https://formspree.io/.......', {
+            const response = await fetch('https://formspree.io/f/mojzrdry', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
