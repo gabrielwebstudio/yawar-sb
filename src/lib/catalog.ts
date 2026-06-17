@@ -7,21 +7,23 @@ export const getCatalogData = cache(async () => {
     try {
         const storyblokApi = getStoryblokApi();
 
-        const { data } = await storyblokApi.get("cdn/stories/danser", {
+        const { data } = await storyblokApi.get("cdn/stories", {
             version,
-            resolve_relations: ["danser_showcase.danser"],
+            starts_with: "danser/",
         });
 
-        const dances = data.story?.content?.body?.[0]?.danser || [];
-        const sortedDances = [...dances].sort((a, b) => a.name.localeCompare(b.name, "sv"));
+        const dances = data.stories
+            .filter((story) => story.slug !== "danser")
+            .sort((a, b) => a.name.localeCompare(b.name, "sv"));
 
-        const dancesLinks = sortedDances.map((m) => ({
-            label: m.name,
-            href: `/danser/${m.slug}`,
+
+        const dancesLinks = dances.map((dance) => ({
+            label: dance.name,
+            href: `/danser/${dance.slug}`,
         }));
 
         return {
-            dances: sortedDances,
+            dances,
             dancesLinks,
         };
     } catch {

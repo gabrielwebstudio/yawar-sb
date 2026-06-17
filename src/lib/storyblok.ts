@@ -5,6 +5,8 @@ import NyhetStart from '@/components/start/NyhetStart';
 import About from '@/components/about/About';
 import Contact from '@/components/contact/Contact';
 import Footer from '@/components/Footer';
+import Dans from '@/components/Dans';
+import DanserShowcase from '@/components/DanserShowcase';
 
 import { apiPlugin, storyblokInit } from '@storyblok/react/rsc';
 
@@ -19,6 +21,8 @@ export const getStoryblokApi = storyblokInit({
     om_oss: About,
     kontakt: Contact,
     footer: Footer,
+    dans: Dans,
+    danser_showcase: DanserShowcase,
   },
   apiOptions: {
     region: 'eu',
