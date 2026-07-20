@@ -37,7 +37,7 @@ export default function Footer({ blok }: { blok: any }) {
                     <div className="lg:col-span-2">
                         <p className="font-bold">Bolivia Yawar Mallku</p>
                         <p className="mt-4 max-w-md text-body leading-relaxed">
-                            {blok.beskrivning}
+                            {blok?.beskrivning}
                         </p>
                     </div>
 
