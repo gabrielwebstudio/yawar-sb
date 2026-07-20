@@ -61,13 +61,15 @@ export default function Footer({ blok }: { blok: any }) {
                         <h3 className="text-sm font-semibold uppercase text-heading">Kontakt</h3>
                         <ul className="mt-4 flex gap-4">
                             <li>
-                                <Link
-                                    href={`mailto:${blok.mail}`}
-                                    target="_blank"
-                                    className="group flex h-10 w-10 items-center justify-center rounded-full hover:bg-primary hover:text-background transition-colors bg-primary/10 text-primary"
-                                >
-                                    <Mail className="h-5 w-5 shrink-0" />
-                                </Link>
+                                {blok.mail && (
+                                    <Link
+                                        href={`mailto:${blok.mail}`}
+                                        target="_blank"
+                                        className="group flex h-10 w-10 items-center justify-center rounded-full hover:bg-primary hover:text-background transition-colors bg-primary/10 text-primary"
+                                    >
+                                        <Mail className="h-5 w-5 shrink-0" />
+                                    </Link>
+                                )}
                             </li>
                             <li>
                                 <Link
