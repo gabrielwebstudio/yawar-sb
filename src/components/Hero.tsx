@@ -2,15 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-export default function Hero({blok} : {blok: any}) {
+export default function Hero({ blok }: { blok: any }) {
 
-	const { titel, text, bild } = blok;
-	const words = titel.split(" ");
+	const { titel = "", text = "", bild } = blok ?? {};
+	const words = titel.split(" ").filter(Boolean);
 
 	const content = (
 		<>
 			<h1 className="max-w-xl text-heading text-4xl md:text-6xl font-bold tracking-tight leading-tight">
-				{words.map((titel : string, i: number) =>
+				{words.map((titel: string, i: number) =>
 					titel === "Boliviansk" ? (
 						<span
 							key={i}
@@ -47,25 +47,29 @@ export default function Hero({blok} : {blok: any}) {
 		</>
 	);
 
-		return (
-			<section className="relative flex min-h-[100vh] items-center justify-center overflow-hidden">
-				<div className="absolute inset-0">
+	return (
+		<section className="relative flex min-h-[100vh] items-center justify-center overflow-hidden">
+			<div className="absolute inset-0">
+				{bild?.filename ? (
 					<Image
 						src={bild.filename}
-						alt={"hero"}
+						alt={bild.alt || "hero"}
 						fill
 						className="object-cover object-[50%_20%] "
 						priority
 					/>
-				</div>
+				) : (
+					<div className="absolute inset-0 bg-background" />
+				)}
+			</div>
 
-				<div className="absolute inset-0 bg-linear-to-r from-background via-background via-50% md:via-40% to-background/50 md:to-background/30 " />
+			<div className="absolute inset-0 bg-linear-to-r from-background via-background via-50% md:via-40% to-background/50 md:to-background/30 " />
 
-				<div className="container relative z-10 mx-auto px-4">
-					<div className="mx-auto w-full text-start">
-						<div className="flex flex-col items-start">{content}</div>
-					</div>
+			<div className="container relative z-10 mx-auto px-4">
+				<div className="mx-auto w-full text-start">
+					<div className="flex flex-col items-start">{content}</div>
 				</div>
-			</section>
-		);
-	}
+			</div>
+		</section>
+	);
+}

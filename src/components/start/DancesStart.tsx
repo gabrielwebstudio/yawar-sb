@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 import CardMotion from "@/components/motions/CardMotion";
 
 export default function DanserStart({ blok }: { blok: any }) {
-    const { titel, liten_titel, danser } = blok;
+    const { titel = "", liten_titel = "", danser = [] } = blok ?? {};
 
     return (
         <Section className={"bg-card border-t"}>
@@ -21,15 +21,17 @@ export default function DanserStart({ blok }: { blok: any }) {
                 </SectionTitle>
             </SectionHeader>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {danser.slice(0, 3).map((d: any, i: number) => (
+                {(danser ?? []).slice(0, 3).map((d: any, i: number) => (
 
-                    <CardMotion i={i} key={d.uuid}>
-                        <Link href={d.full_slug} className="group block">
+                    <CardMotion i={i} key={d?.uuid ?? i}>
+                        <Link href={d?.full_slug ?? "/danser"} className="group block">
                             <div className="overflow-hidden rounded-sm mb-4">
-                                <Image src={d.content.bild.filename} alt={d.content.bild.alt} loading="lazy" width={800} height={600} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+                                {d?.content?.bild?.filename ? (
+                                    <Image src={d.content.bild.filename} alt={d.content.bild.alt || d?.content?.namn || "dans"} loading="lazy" width={800} height={600} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+                                ) : null}
                             </div>
-                            <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors ">{d.content.namn}</h3>
-                            <p className="text-sm text-muted-foreground line-clamp-1">{d.content.beskrivning}</p>
+                            <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors ">{d?.content?.namn ?? ""}</h3>
+                            <p className="text-sm text-muted-foreground line-clamp-1">{d?.content?.beskrivning ?? ""}</p>
                         </Link>
                     </CardMotion>
                 )

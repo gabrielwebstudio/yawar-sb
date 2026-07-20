@@ -10,7 +10,7 @@ import { renderRichText } from "@storyblok/react";
 export default function Nyhet({ blok }: { blok: any }) {
     console.log("nyhetblok:", blok);
 
-    const { rubrik, bild, text } = blok;
+    const { rubrik = "", bild, text = "" } = blok ?? {};
 
     return (
         <Section>
@@ -24,7 +24,7 @@ export default function Nyhet({ blok }: { blok: any }) {
                             {rubrik}
                         </SectionTitle>
                         <Text>
-                            {text}
+                            {text ?? ""}
                         </Text>
                     </div>
                     <div>

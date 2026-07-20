@@ -38,9 +38,9 @@ export default async function NyheterPage({ searchParams }: Props) {
         per_page: PER_PAGE,
     });
 
-    const news = data.stories;
+    const news = data?.stories ?? [];
 
-    const totalStories = Number((headers as any).total);
+    const totalStories = Number((headers as any)?.total ?? news.length);
     const totalPages = Math.ceil(totalStories / PER_PAGE);
 
     if (currentPage > totalPages || currentPage == 0) return notFound();
@@ -60,33 +60,37 @@ export default async function NyheterPage({ searchParams }: Props) {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {news.map((n: any) => (
-                        <Link
-                            key={n.uuid}
-                            href={`/${n.full_slug}`}
-                            className="group block"
-                        >
-                            <div className="overflow-hidden rounded-sm mb-4">
-                                <Image
-                                    src={n.content.bild.filename}
-                                    alt={n.content.bild.alt || n.content.rubrik}
-                                    width={800}
-                                    height={600}
-                                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
-                                />
-                            </div>
+                        n?.full_slug ? (
+                            <Link
+                                key={n?.uuid ?? n?.full_slug}
+                                href={`/${n.full_slug}`}
+                                className="group block"
+                            >
+                                <div className="overflow-hidden rounded-sm mb-4">
+                                    {n?.content?.bild?.filename ? (
+                                        <Image
+                                            src={n.content.bild.filename}
+                                            alt={n.content.bild.alt || n?.content?.rubrik || "nyhet"}
+                                            width={800}
+                                            height={600}
+                                            className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                                        />
+                                    ) : null}
+                                </div>
 
-                            <h2 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
-                                {n.content.rubrik}
-                            </h2>
+                                <h2 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                                    {n?.content?.rubrik ?? ""}
+                                </h2>
 
-                            <Text>
-                                {n.content.text}
-                            </Text>
+                                <Text>
+                                    {n?.content?.text ?? ""}
+                                </Text>
 
-                            <span className="text-primary text-sm font-medium inline-flex items-center gap-1">
-                                Läs mer <ArrowRight className="w-3 h-3" />
-                            </span>
-                        </Link>
+                                <span className="text-primary text-sm font-medium inline-flex items-center gap-1">
+                                    Läs mer <ArrowRight className="w-3 h-3" />
+                                </span>
+                            </Link>
+                        ) : null
                     ))}
                 </div>
 

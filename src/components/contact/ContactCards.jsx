@@ -2,13 +2,13 @@ import Card from "../card/Card";
 import { Phone, Mail, Camera } from "lucide-react"
 
 export default function ContactCards({ blok }) {
-  const { telefonnummer, mail, instagram } = blok;
+  const { telefonnummer, mail, instagram } = blok || {};
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-      <ContactCard value={mail} title="email" />
-      <ContactCard value={telefonnummer} title="telefon" />
-      <ContactCard value={instagram} title="instagram" />
+      {mail ? <ContactCard value={mail} title="email" /> : null}
+      {telefonnummer ? <ContactCard value={telefonnummer} title="telefon" /> : null}
+      {instagram ? <ContactCard value={instagram} title="instagram" /> : null}
     </div>
   )
 }
@@ -30,6 +30,10 @@ export function ContactCard({ title, value }) {
   const href = hrefMap[title]
 
   const Icon = iconMap[title];
+
+  if (!value || !Icon || !href) {
+    return null;
+  }
 
   return (
     <a

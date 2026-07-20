@@ -11,7 +11,7 @@ import { notFound } from "next/navigation"
 
 export default async function Dans({ blok }: { blok: any }) {
 
-  const { bild, namn, egenskaper, beskrivning } = blok;
+  const { bild, namn, egenskaper = [], beskrivning = "" } = blok ?? {};
 
   return (
 
@@ -47,14 +47,16 @@ export default async function Dans({ blok }: { blok: any }) {
 
         </div>
         <div>
-          <Image
-            src={bild.filename}
-            alt={bild.alt}
-            className="w-full h-125 object-cover rounded-sm"
-            loading="lazy"
-            width={800}
-            height={600}
-          />
+          {bild?.filename ? (
+            <Image
+              src={bild.filename}
+              alt={bild.alt || namn || "dans"}
+              className="w-full h-125 object-cover rounded-sm"
+              loading="lazy"
+              width={800}
+              height={600}
+            />
+          ) : null}
         </div>
       </SectionLayout>
     </Section>
