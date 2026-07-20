@@ -9,7 +9,7 @@ import CardMotion from "@/components/motions/CardMotion";
 
 export default function DanserStart({ blok }: { blok: any }) {
     const { titel, liten_titel, danser } = blok;
-    console.log("DANSER:", danser);
+
     return (
         <Section className={"bg-card border-t"}>
             <SectionHeader variant="left">

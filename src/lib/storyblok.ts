@@ -7,6 +7,7 @@ import Contact from '@/components/contact/Contact';
 import Footer from '@/components/Footer';
 import Dans from '@/components/Dans';
 import DanserShowcase from '@/components/DanserShowcase';
+import Nyhet from '@/components/Nyhet';
 
 import { apiPlugin, storyblokInit } from '@storyblok/react/rsc';
 
@@ -23,6 +24,7 @@ export const getStoryblokApi = storyblokInit({
     footer: Footer,
     dans: Dans,
     danser_showcase: DanserShowcase,
+    nyhet: Nyhet,
   },
   apiOptions: {
     region: 'eu',

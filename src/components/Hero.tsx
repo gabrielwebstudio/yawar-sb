@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export default function Hero({blok} : {blok: any}) {
-  console.log(blok);
+
 	const { titel, text, bild } = blok;
 	const words = titel.split(" ");
 

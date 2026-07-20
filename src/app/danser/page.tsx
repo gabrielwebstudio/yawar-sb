@@ -27,7 +27,7 @@ export default async function page() {
 
     });
 
-    const dances = data.stories.sort((a, b) => a.name.localeCompare(b.name, "sv"));
+    const dances = data.stories.sort((a: any, b: any) => a.name.localeCompare(b.name, "sv"));
 
 
     return (
@@ -45,7 +45,7 @@ export default async function page() {
                     </SectionSubtitle>
                 </SectionHeader>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {dances.map((d, i) => (
+                    {dances.map((d: any, i: number) => (
                         <CardMotion i={i} key={i}>
 
                             <Link href={d.full_slug} className="group block">

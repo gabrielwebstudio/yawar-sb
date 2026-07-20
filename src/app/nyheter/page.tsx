@@ -9,6 +9,7 @@ import SectionTitle from "@/components/section/SectionTitle";
 import SectionSmallTitle from "@/components/section/SectionSmallTitle";
 import { notFound } from "next/navigation";
 import { renderRichText } from "@storyblok/react";
+import Text from "@/components/Text";
 
 const storyVersion =
     process.env.VERCEL_ENV === "production" ? "published" : "draft";
@@ -39,8 +40,7 @@ export default async function NyheterPage({ searchParams }: Props) {
 
     const news = data.stories;
 
-    console.log(news[0]);
-    const totalStories = Number(headers.total);
+    const totalStories = Number((headers as any).total);
     const totalPages = Math.ceil(totalStories / PER_PAGE);
 
     if (currentPage > totalPages || currentPage == 0) return notFound();
@@ -79,12 +79,9 @@ export default async function NyheterPage({ searchParams }: Props) {
                                 {n.content.rubrik}
                             </h2>
 
-                            <div
-                                className="text-muted-foreground text-sm mb-3 line-clamp-2"
-                                dangerouslySetInnerHTML={{
-                                    __html: renderRichText(n.content.text),
-                                }}
-                            />
+                            <Text>
+                                {n.content.text}
+                            </Text>
 
                             <span className="text-primary text-sm font-medium inline-flex items-center gap-1">
                                 Läs mer <ArrowRight className="w-3 h-3" />

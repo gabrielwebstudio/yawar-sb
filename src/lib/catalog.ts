@@ -13,11 +13,11 @@ export const getCatalogData = cache(async () => {
         });
 
         const dances = data.stories
-            .filter((story) => story.slug !== "danser")
-            .sort((a, b) => a.name.localeCompare(b.name, "sv"));
+            .filter((story: any) => story.slug !== "danser")
+            .sort((a: any, b: any) => a.name.localeCompare(b.name, "sv"));
 
 
-        const dancesLinks = dances.map((dance) => ({
+        const dancesLinks = dances.map((dance: any) => ({
             label: dance.name,
             href: `/danser/${dance.slug}`,
         }));
