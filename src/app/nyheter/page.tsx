@@ -99,7 +99,7 @@ export default async function NyheterPage({ searchParams }: Props) {
                         aria-label="Paginering för nyheter"
                         className="mt-14 flex items-center justify-center"
                     >
-                        <div className="flex w-full max-w-md items-center justify-between rounded-full border border-border bg-card px-4 py-3 shadow-sm">
+                        <div className="flex w-full max-w-md items-center justify-between rounded-full border border-border bg-card px-4 py-3 ">
                             {currentPage > 1 ? (
                                 <Link
                                     href={`/nyheter?page=${currentPage - 1}`}
