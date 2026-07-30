@@ -8,11 +8,12 @@ import SectionHeader from "@/components/section/SectionHeader";
 import SectionTitle from "@/components/section/SectionTitle";
 import SectionSmallTitle from "@/components/section/SectionSmallTitle";
 import { notFound } from "next/navigation";
-import { renderRichText } from "@storyblok/react";
 import Text from "@/components/Text";
 
 const storyVersion =
     process.env.VERCEL_ENV === "production" ? "published" : "draft";
+
+
 
 const PER_PAGE = 9;
 
@@ -94,21 +95,54 @@ export default async function NyheterPage({ searchParams }: Props) {
                     ))}
                 </div>
 
-                <div className="flex justify-center gap-2 mt-12">
-                    {currentPage !== 1 &&
-                        <Link href={`/nyheter?page=${currentPage - 1}`}>
-                            <ArrowLeft />
-                        </Link>
-                    }
-                    <span>
-                        {currentPage}
-                    </span>
-                    {currentPage !== totalPages &&
-                        <Link href={`/nyheter?page=${currentPage + 1}`}>
-                            <ArrowRight />
-                        </Link>
-                    }
-                </div>
+                    <nav
+                        aria-label="Paginering för nyheter"
+                        className="mt-14 flex items-center justify-center"
+                    >
+                        <div className="flex w-full max-w-md items-center justify-between rounded-full border border-border bg-card px-4 py-3 shadow-sm">
+                            {currentPage > 1 ? (
+                                <Link
+                                    href={`/nyheter?page=${currentPage - 1}`}
+                                    aria-label="Föregående sida"
+                                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-heading transition hover:border-primary hover:text-primary"
+                                >
+                                    <ArrowLeft className="h-4 w-4" />
+                                 
+                                </Link>
+                            ) : (
+                                <span
+                                    aria-disabled="true"
+                                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground opacity-50"
+                                >
+                                    <ArrowLeft className="h-4 w-4" />
+                                 
+                                </span>
+                            )}
+
+                            <span className="rounded-full px-4 py-2 text-sm font-semibold text-heading">
+                                Sida {currentPage} av {totalPages}
+                            </span>
+
+                            {currentPage < totalPages ? (
+                                <Link
+                                    href={`/nyheter?page=${currentPage + 1}`}
+                                    aria-label="Nästa sida"
+                                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-heading transition hover:border-primary hover:text-primary"
+                                >
+                                  
+                                    <ArrowRight className="h-4 w-4" />
+                                </Link>
+                            ) : (
+                                <span
+                                    aria-disabled="true"
+                                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground opacity-50"
+                                >
+                                   
+                                    <ArrowRight className="h-4 w-4" />
+                                </span>
+                            )}
+                        </div>
+                    </nav>
             </Section>
         </Layout>
     );
