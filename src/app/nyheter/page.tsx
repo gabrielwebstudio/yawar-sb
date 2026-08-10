@@ -9,6 +9,25 @@ import SectionTitle from "@/components/section/SectionTitle";
 import SectionSmallTitle from "@/components/section/SectionSmallTitle";
 import { notFound } from "next/navigation";
 import Text from "@/components/Text";
+import { getPublicationDate } from "@/lib/utils";
+
+type NewsStory = {
+    full_slug?: string;
+    uuid?: string;
+    content?: {
+        rubrik?: string;
+        text?: string;
+        bild?: {
+            filename?: string;
+            alt?: string;
+        };
+    };
+    published_at?: string | Date | null;
+    created_at?: string | Date | null;
+    first_published_at?: string | Date | null;
+    date?: string | Date | null;
+    [key: string]: unknown;
+};
 
 const storyVersion =
     process.env.VERCEL_ENV === "production" ? "published" : "draft";
@@ -41,7 +60,7 @@ export default async function NyheterPage({ searchParams }: Props) {
 
     const news = data?.stories ?? [];
 
-    const totalStories = Number((headers as any)?.total ?? news.length);
+    const totalStories = Number((headers as { total?: number | string } | undefined)?.total ?? news.length);
     const totalPages = Math.ceil(totalStories / PER_PAGE);
 
     if (currentPage > totalPages || currentPage == 0) return notFound();
@@ -60,7 +79,7 @@ export default async function NyheterPage({ searchParams }: Props) {
                 </SectionHeader>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {news.map((n: any) => (
+                    {news.map((n: NewsStory) => (
                         n?.full_slug ? (
                             <Link
                                 key={n?.uuid ?? n?.full_slug}
@@ -83,10 +102,17 @@ export default async function NyheterPage({ searchParams }: Props) {
                                     {n?.content?.rubrik ?? ""}
                                 </h2>
 
-                                <Text>
-                                    {n?.content?.text ?? ""}
-                                </Text>
+                                {(() => {
+                                    const publicationDate = getPublicationDate(n);
 
+                                    return publicationDate ? (
+                                        <p className="mb-3 text-sm text-muted-foreground">
+                                            {publicationDate}
+                                        </p>
+                                    ) : null;
+                                })()}
+
+                               
                                 <span className="text-primary text-sm font-medium inline-flex items-center gap-1">
                                     Läs mer <ArrowRight className="w-3 h-3" />
                                 </span>
@@ -95,54 +121,54 @@ export default async function NyheterPage({ searchParams }: Props) {
                     ))}
                 </div>
 
-                    <nav
-                        aria-label="Paginering för nyheter"
-                        className="mt-14 flex items-center justify-center"
-                    >
-                        <div className="flex w-full max-w-md items-center justify-between rounded-full border border-border bg-card px-4 py-3 ">
-                            {currentPage > 1 ? (
-                                <Link
-                                    href={`/nyheter?page=${currentPage - 1}`}
-                                    aria-label="Föregående sida"
-                                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-heading transition hover:border-primary hover:text-primary"
-                                >
-                                    <ArrowLeft className="h-4 w-4" />
-                                 
-                                </Link>
-                            ) : (
-                                <span
-                                    aria-disabled="true"
-                                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground opacity-50"
-                                >
-                                    <ArrowLeft className="h-4 w-4" />
-                                 
-                                </span>
-                            )}
+                <nav
+                    aria-label="Paginering för nyheter"
+                    className="mt-14 flex items-center justify-center"
+                >
+                    <div className="flex w-full max-w-md items-center justify-between rounded-full border border-border bg-card px-4 py-3 ">
+                        {currentPage > 1 ? (
+                            <Link
+                                href={`/nyheter?page=${currentPage - 1}`}
+                                aria-label="Föregående sida"
+                                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-heading transition hover:border-primary hover:text-primary"
+                            >
+                                <ArrowLeft className="h-4 w-4" />
 
-                            <span className="rounded-full px-4 py-2 text-sm font-semibold text-heading">
-                                Sida {currentPage} av {totalPages}
+                            </Link>
+                        ) : (
+                            <span
+                                aria-disabled="true"
+                                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground opacity-50"
+                            >
+                                <ArrowLeft className="h-4 w-4" />
+
                             </span>
+                        )}
 
-                            {currentPage < totalPages ? (
-                                <Link
-                                    href={`/nyheter?page=${currentPage + 1}`}
-                                    aria-label="Nästa sida"
-                                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-heading transition hover:border-primary hover:text-primary"
-                                >
-                                  
-                                    <ArrowRight className="h-4 w-4" />
-                                </Link>
-                            ) : (
-                                <span
-                                    aria-disabled="true"
-                                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground opacity-50"
-                                >
-                                   
-                                    <ArrowRight className="h-4 w-4" />
-                                </span>
-                            )}
-                        </div>
-                    </nav>
+                        <span className="rounded-full px-4 py-2 text-sm font-semibold text-heading">
+                            Sida {currentPage} av {totalPages}
+                        </span>
+
+                        {currentPage < totalPages ? (
+                            <Link
+                                href={`/nyheter?page=${currentPage + 1}`}
+                                aria-label="Nästa sida"
+                                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-heading transition hover:border-primary hover:text-primary"
+                            >
+
+                                <ArrowRight className="h-4 w-4" />
+                            </Link>
+                        ) : (
+                            <span
+                                aria-disabled="true"
+                                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground opacity-50"
+                            >
+
+                                <ArrowRight className="h-4 w-4" />
+                            </span>
+                        )}
+                    </div>
+                </nav>
             </Section>
         </Layout>
     );
