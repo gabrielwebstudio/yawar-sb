@@ -1,25 +1,37 @@
 import Section from "./section/Section"
 import SectionLayout from "./section/SectionLayout"
-import SectionSmallTitle from "./section/SectionSmallTitle"
 import SectionTitle from "./section/SectionTitle"
+import SectionSmallTitle from "./section/SectionSmallTitle"
 import Text from "./Text"
 import Image from "next/image"
-import { renderRichText } from "@storyblok/react";
+import { getPublicationDate } from "@/lib/utils";
 
+type NyhetBlock = {
+    rubrik?: string;
+    bild?: {
+        filename?: string;
+        alt?: string;
+    };
+    text?: string;
+    published_at?: string | Date | null;
+    [key: string]: unknown;
+};
 
-export default function Nyhet({ blok }: { blok: any }) {
-    console.log("nyhetblok:", blok);
+export default function Nyhet({ blok }: { blok?: NyhetBlock }) {
 
     const { rubrik = "", bild, text = "" } = blok ?? {};
+    const publicationDate = getPublicationDate(blok);
 
     return (
         <Section>
             <article className="">
                 <SectionLayout>
                     <div>
-                        <SectionSmallTitle>
-                            test
-                        </SectionSmallTitle>
+                        {publicationDate ? (
+                            <SectionSmallTitle>
+                                {publicationDate}
+                            </SectionSmallTitle>
+                        ) : null }
                         <SectionTitle>
                             {rubrik}
                         </SectionTitle>
