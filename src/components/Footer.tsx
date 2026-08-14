@@ -72,7 +72,7 @@ export default function Footer({ blok }: { blok: any }) {
                                     </Link>
                                 </li>
                             )}
-                            {footer?.telefon && (
+                            {/* {footer?.telefon && (
                                 <li>
                                     <Link
                                         href={`tel:${footer.telefon}`}
@@ -82,7 +82,7 @@ export default function Footer({ blok }: { blok: any }) {
                                         <Phone className="h-5 w-5 shrink-0" />
                                     </Link>
                                 </li>
-                            )}
+                            )} */}
                             {footer?.instagram && (
                                 <li>
                                     <Link
