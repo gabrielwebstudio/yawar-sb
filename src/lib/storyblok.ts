@@ -8,6 +8,8 @@ import Footer from '@/components/Footer';
 import Dans from '@/components/Dans';
 import DanserShowcase from '@/components/DanserShowcase';
 import Nyhet from '@/components/Nyhet';
+import ImageGallery from '@/components/start/ImageGallery';
+import Banner from '@/components/Banner';
 
 import { apiPlugin, storyblokInit } from '@storyblok/react/rsc';
 
@@ -25,6 +27,8 @@ export const getStoryblokApi = storyblokInit({
     dans: Dans,
     danser_showcase: DanserShowcase,
     nyhet: Nyhet,
+    bilder_start: ImageGallery,
+    banner: Banner,
   },
   apiOptions: {
     region: 'eu',
