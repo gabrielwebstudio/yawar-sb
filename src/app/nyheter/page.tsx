@@ -8,7 +8,6 @@ import SectionHeader from "@/components/section/SectionHeader";
 import SectionTitle from "@/components/section/SectionTitle";
 import SectionSmallTitle from "@/components/section/SectionSmallTitle";
 import { notFound } from "next/navigation";
-import Text from "@/components/Text";
 import { getPublicationDate } from "@/lib/utils";
 
 type NewsStory = {
@@ -41,6 +40,29 @@ type Props = {
         page?: string;
     }>;
 };
+
+export async function generateMetadata({ params }: any) {
+
+    let title = "Nyheter | Bolivia Yawar Mallku";
+    let description = "Våra nyheter";
+    let image = "https://a.storyblok.com/f/292901700022302/4564x4466/c6a37c283f/logo_svart.svg";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+
+    return {
+        title,
+        description,
+        alternates: {
+            canonical: `${baseUrl}/nyheter`,
+        },
+        openGraph: {
+            title,
+            description,
+            images: image ? [image] : [],
+        },
+    };
+
+}
 
 export default async function NyheterPage({ searchParams }: Props) {
     const { page } = await searchParams;
@@ -112,7 +134,7 @@ export default async function NyheterPage({ searchParams }: Props) {
                                     ) : null;
                                 })()}
 
-                               
+
                                 <span className="text-primary text-sm font-medium inline-flex items-center gap-1">
                                     Läs mer <ArrowRight className="w-3 h-3" />
                                 </span>

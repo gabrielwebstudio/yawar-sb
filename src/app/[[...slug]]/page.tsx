@@ -5,6 +5,86 @@ import Layout from "@/components/Layout";
 
 const storyVersion = process.env.VERCEL_ENV === "production" ? "published" : "draft";
 
+const defaultMetadata = {
+    title: "Bolivia Yawar Mallku",
+    description: "Boliviansk folkdansgrupp i Sverige",
+};
+
+export async function generateMetadata({ params }: any) {
+    const { slug } = await params;
+    const fullSlug = slug ? slug.join("/") : "hem";
+
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const canonicalUrl = fullSlug === "hem" ? baseUrl : `${baseUrl}/${fullSlug}`;
+
+    try {
+        const storyblokApi = getStoryblokApi();
+
+        const { data } = await storyblokApi.get(`cdn/stories/${fullSlug}`, {
+            version: storyVersion,
+        });
+
+        const page = data?.story?.content;
+
+        if (!page) {
+            return defaultMetadata;
+        }
+
+        const siteName = defaultMetadata.title;
+
+        let title;
+        let description;
+        let image;
+
+        if (page.component === "dans") {
+            title = page.namn
+                ? `${page.namn} | ${siteName}`
+                : defaultMetadata.title;
+
+            description = page.beskrivning
+                ? `${page.beskrivning} ${page.egenskaper?.join(", ")}.`
+                : defaultMetadata.description;
+
+            image = page.bild?.filename;
+        } else if (page.component === "nyhet") {
+            title = page.rubrik
+                ? `${page.rubrik} | ${siteName}`
+                : defaultMetadata.title;
+
+            description = page.text || defaultMetadata.description;
+
+            image = page.bild?.filename;
+        } else {
+            title = page.SEO_titel
+                ? `${page.SEO_titel} | ${siteName}`
+                : defaultMetadata.title;
+
+            description =
+                page.SEO_beskrivning || defaultMetadata.description;
+
+            image = page.OG_bild?.filename;
+        }
+
+        return {
+            title,
+            description,
+            alternates: {
+                canonical: canonicalUrl,
+            },
+            openGraph: {
+                title,
+                description,
+                images: image ? [image] : [],
+            },
+        };
+    } catch {
+        return {
+            title: "Sidan hittades inte | Bolivia Yawar Mallku",
+            description: defaultMetadata.description,
+        };
+    }
+}
+
 type PageProps = {
     params: Promise<{
         slug?: string[]
