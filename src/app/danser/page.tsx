@@ -8,12 +8,34 @@ import SectionHeader from "@/components/section/SectionHeader";
 import SectionTitle from "@/components/section/SectionTitle";
 import SectionSmallTitle from "@/components/section/SectionSmallTitle";
 import SectionSubtitle from "@/components/section/SectionSubtitle"
-import { notFound } from "next/navigation";
 import CardMotion from "@/components/motions/CardMotion";
 
 
 const storyVersion =
     process.env.VERCEL_ENV === "production" ? "published" : "draft";
+
+export async function generateMetadata({ params }: any) {
+
+    let title = "Våra Danser | Bolivia Yawar Mallku";
+    let description = "Våra danser";
+    let image = "https://a.storyblok.com/f/292901700022302/4564x4466/c6a37c283f/logo_svart.svg";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+
+    return {
+        title,
+        description,
+        alternates: {
+            canonical: `${baseUrl}/danser`,
+        },
+        openGraph: {
+            title,
+            description,
+            images: image ? [image] : [],
+        },
+    };
+
+}
 
 
 export default async function page() {
