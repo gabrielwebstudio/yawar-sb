@@ -10,6 +10,7 @@ import DanserShowcase from '@/components/DanserShowcase';
 import Nyhet from '@/components/Nyhet';
 import ImageGallery from '@/components/start/ImageGallery';
 import Banner from '@/components/Banner';
+import SocialMediaBanner from '@/components/SocialMediaBanner';
 
 import { apiPlugin, storyblokInit } from '@storyblok/react/rsc';
 
@@ -29,6 +30,7 @@ export const getStoryblokApi = storyblokInit({
     nyhet: Nyhet,
     bilder_start: ImageGallery,
     banner: Banner,
+    sociala_medier: SocialMediaBanner,
   },
   apiOptions: {
     region: 'eu',
