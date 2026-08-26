@@ -5,6 +5,7 @@ import StoryblokProvider from "@/components/StoryBlokProvider";
 import { getCatalogData, getFooter } from "@/lib/catalog";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
           {children}
           <Footer blok={footer} />
         </StoryblokProvider>
+        <Analytics />
       </body>
     </html>
   );
