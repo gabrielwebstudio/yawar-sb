@@ -22,16 +22,17 @@ export default function SocialMediaBanner() {
     )
 }
 
+
 function SocialMedias() {
     return (
 
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 ">
             <Link
                 href={`https://instagram.com/boliviayawarmallku`}
                 target="_blank"
                 className="group flex h-10 w-10 items-center justify-center rounded-full hover:bg-primary hover:text-background transition-colors bg-primary/10 text-primary"
             >
-                <FaInstagram className="w-8 h-8 shrink-0" />
+                <FaInstagram className="w-8 h-8 shrink-0 " />
 
             </Link>
             <Link
