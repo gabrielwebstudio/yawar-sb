@@ -1,5 +1,6 @@
 import Card from "../card/Card";
-import { Phone, Mail, Camera } from "lucide-react"
+import { Phone, Mail } from "lucide-react"
+import { FaInstagram } from "react-icons/fa";
 
 export default function ContactCards({ blok }) {
   const { telefonnummer, mail, instagram } = blok || {};
@@ -18,7 +19,7 @@ export function ContactCard({ title, value }) {
   const iconMap = {
     telefon: Phone,
     email: Mail,
-    instagram: Camera,
+    instagram: FaInstagram,
   }
 
   const hrefMap = {
