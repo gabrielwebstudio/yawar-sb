@@ -31,6 +31,7 @@ function SocialMedias() {
                 href={`https://instagram.com/boliviayawarmallku`}
                 target="_blank"
                 className="group flex h-10 w-10 items-center justify-center rounded-full hover:bg-primary hover:text-background transition-colors bg-primary/10 text-primary"
+                aria-label="Yawar Mallku på instagram"
             >
                 <FaInstagram className="w-8 h-8 shrink-0 " />
 
@@ -39,8 +40,9 @@ function SocialMedias() {
                 href={`https://www.facebook.com/p/Bolivia-Yawar-Mallku-100064728547532/`}
                 target="_blank"
                 className="group flex h-10 w-10 items-center justify-center rounded-full hover:bg-primary hover:text-background transition-colors bg-primary/10 text-primary"
+                aria-label="Yawar Mallku på facebook"
             >
-                <FaFacebook className="w-8 h-8 shrink-0"/>
+                <FaFacebook className="w-8 h-8 shrink-0" />
             </Link>
             {/* <Link
                     href={`https://instagram.com/boliviayawarmallku}`}
@@ -53,15 +55,17 @@ function SocialMedias() {
                 href={`https://youtube.com/@Yawar_Mallku?cbrd=1`}
                 target="_blank"
                 className="group flex h-10 w-10 items-center justify-center rounded-full hover:bg-primary hover:text-background transition-colors bg-primary/10 text-primary"
+                aria-label="Yawar Mallku på youtube"
             >
-                <FaYoutube className="w-8 h-8 shrink-0"/>
+                <FaYoutube className="w-8 h-8 shrink-0" />
             </Link>
             <Link
                 href={`https://www.tiktok.com/@boliviayawarmallku`}
                 target="_blank"
                 className="group flex h-10 w-10 items-center justify-center rounded-full hover:bg-primary hover:text-background transition-colors bg-primary/10 text-primary"
+                aria-label="Yawar Mallku på tiktok"
             >
-                <FaTiktok className="w-8 h-8 shrink-0"/>
+                <FaTiktok className="w-8 h-8 shrink-0" />
             </Link>
         </div>
     )

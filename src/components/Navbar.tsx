@@ -57,7 +57,11 @@ const Navbar = ({ dances = [] } : NavbarProps) => {
                 </div>
 
                 {/* Mobile toggle */}
-                <button className="lg:hidden text-foreground cursor-pointer" onClick={() => setMobileOpen(true)}>
+                <button 
+                    className="lg:hidden text-foreground cursor-pointer" 
+                    onClick={() => setMobileOpen(true)}
+                    aria-label="Öppna meny"
+                >
                     <Menu className="w-6 h-6" />
                 </button>
             </div>
@@ -68,7 +72,11 @@ const Navbar = ({ dances = [] } : NavbarProps) => {
                 onClick={() => setMobileOpen(false)}
             />
             <div className={cn("absolute right-0 top-0 w-[300px] z-9 h-screen bg-background transition-transform duration-300 border-l border-border p-0 ", mobileOpen ? "translate-x-0" : "translate-x-full")}>
-                <button className="absolute top-4 right-4 text-foreground cursor-pointer" onClick={() => setMobileOpen(false)}>
+                <button 
+                    className="absolute top-4 right-4 text-foreground cursor-pointer" 
+                    onClick={() => setMobileOpen(false)}
+                    aria-label="Stäng meny"
+                >
                     <X className="w-4 h-4" />
                 </button>
                 <h3 className="sr-only">Meny</h3>
