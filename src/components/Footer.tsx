@@ -81,10 +81,14 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="mt-12 border-t border-border pt-6">
-                    <p className="text-xs text-subheading">
+                <div className="mt-12 border-t border-border pt-6 flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between md:gap-0">
+                    <span className="text-xs text-subheading">
                         © {new Date().getFullYear()} Bolivia Yawar Mallku. Alla rättigheter förbehållna.
-                    </p>
+                    </span>
+                    <a 
+                    href="https://gabrielwebstudio.se"
+                    className="text-xs text-subheading"
+                    >Sidan byggd av <span className="underline text-primary">Gabriel Web Studio</span></a>
                 </div>
             </div>
         </footer>
