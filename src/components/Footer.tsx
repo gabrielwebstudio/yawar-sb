@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Mail, Phone, Camera } from "lucide-react";
-
+import { Mail } from "lucide-react";
+import { FaInstagram } from "react-icons/fa";
 const links = [
     {
         label: "Hem",
@@ -25,10 +25,7 @@ const links = [
 ]
 
 
-export default function Footer({ blok }: { blok: any }) {
-    const footer = blok ?? {};
-
-
+export default function Footer() {
 
     return (
 
@@ -38,7 +35,7 @@ export default function Footer({ blok }: { blok: any }) {
                     <div className="lg:col-span-2">
                         <p className="font-bold">Bolivia Yawar Mallku</p>
                         <p className="mt-4 max-w-md text-body leading-relaxed">
-                            {footer?.beskrivning ?? ""}
+                            En ideell förening sedan 1983
                         </p>
                     </div>
 
@@ -61,47 +58,37 @@ export default function Footer({ blok }: { blok: any }) {
                     <div>
                         <h3 className="text-sm font-semibold uppercase text-heading">Kontakt</h3>
                         <ul className="mt-4 flex gap-4">
-                            {footer?.mail && (
                                 <li>
                                     <Link
-                                        href={`mailto:${footer.mail}`}
+                                        href={"mailto:boliviayawarmallku@gmail.com"}
                                         target="_blank"
                                         className="group flex h-10 w-10 items-center justify-center rounded-full hover:bg-primary hover:text-background transition-colors bg-primary/10 text-primary"
                                     >
                                         <Mail className="h-5 w-5 shrink-0" />
                                     </Link>
                                 </li>
-                            )}
-                            {/* {footer?.telefon && (
+                          
                                 <li>
                                     <Link
-                                        href={`tel:${footer.telefon}`}
+                                        href="https://instagram.com/boliviayawarmallku"
                                         target="_blank"
                                         className="group flex h-10 w-10 items-center justify-center rounded-full hover:bg-primary hover:text-background transition-colors bg-primary/10 text-primary"
                                     >
-                                        <Phone className="h-5 w-5 shrink-0" />
+                                        <FaInstagram className="h-5 w-5 shrink-0" />
                                     </Link>
                                 </li>
-                            )} */}
-                            {footer?.instagram && (
-                                <li>
-                                    <Link
-                                        href={`https://instagram.com/${footer.instagram}`}
-                                        target="_blank"
-                                        className="group flex h-10 w-10 items-center justify-center rounded-full hover:bg-primary hover:text-background transition-colors bg-primary/10 text-primary"
-                                    >
-                                        <Camera className="h-5 w-5 shrink-0" />
-                                    </Link>
-                                </li>
-                            )}
                         </ul>
                     </div>
                 </div>
 
-                <div className="mt-12 border-t border-border pt-6">
-                    <p className="text-xs text-subheading">
+                <div className="mt-12 border-t border-border pt-6 flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between md:gap-0">
+                    <span className="text-xs text-subheading">
                         © {new Date().getFullYear()} Bolivia Yawar Mallku. Alla rättigheter förbehållna.
-                    </p>
+                    </span>
+                    <a 
+                    href="https://gabrielwebstudio.se"
+                    className="text-xs text-subheading"
+                    >Sidan byggd av <span className="underline text-primary">Gabriel Web Studio</span></a>
                 </div>
             </div>
         </footer>
