@@ -11,7 +11,8 @@ import Lightbox from "../Lightbox";
 export default function ImageGallery({ blok }: any) {
 
     const [lightboxOpen, setLightboxOpen] = useState(false);
-    console.log("lightboxOpen:", lightboxOpen);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
 
     return (
         <Section className={"border-t"}>
@@ -33,8 +34,11 @@ export default function ImageGallery({ blok }: any) {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.08 }}
-                        className={`group relative overflow-hidden rounded-sm ${p.span}`}
-                        onClick={() => setLightboxOpen(true)}
+                        className={`group cursor-pointer relative overflow-hidden rounded-sm ${p.span}`}
+                        onClick={() => {
+                            setCurrentIndex(i);
+                            setLightboxOpen(true);
+                        }}
                     >
                         <Image
                             src={p.filename}
@@ -45,14 +49,18 @@ export default function ImageGallery({ blok }: any) {
                             className="w-full h-full min-h-50 object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
                             
                         />
-                        <div className="absolute inset-0 bg-linear-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span className="text-sm font-medium text-foreground">{p.name}</span>
-                        </div>
+                       
                     </motion.div>
                 ))}
             </div>
 
-            <Lightbox lightboxOpen={lightboxOpen} setLightboxOpen={setLightboxOpen} />
+            <Lightbox 
+                lightboxOpen={lightboxOpen} 
+                setLightboxOpen={setLightboxOpen}
+                images={blok.bilder}
+                currentIndex={currentIndex}
+                setCurrentIndex={setCurrentIndex}
+            />
         </Section>
     )
 }
