@@ -9,7 +9,6 @@ export default async function sitemap() {
         per_page: 100,
     })
 
-    console.log("stories", data.stories);
 
     const stories = (data.stories || []).filter((story) => {
         return story.content?.component === 'page' || story.content?.component === 'dans'
